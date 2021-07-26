@@ -1,4 +1,6 @@
 import React from 'react';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import { HighlightCard } from '../../components/HighlightCard';
 import { TransactionCard } from '../../components/TransactionCard';
 
@@ -15,9 +17,43 @@ import {
   HighlightCards,
   Transactions,
   Title,
+  TransactionList,
 } from './styles';
 
 export function Dashboard() {
+  const data = [
+    {
+      type: 'positive',
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        name: 'Vendas',
+        icon: 'dollar-sign',
+      },
+      date: '13/04/2020',
+    },
+    {
+      type: 'negative',
+      title: 'Hamburgueria Pizzy',
+      amount: 'R$ 59,00',
+      category: {
+        name: 'Alimentação',
+        icon: 'dollar-sign',
+      },
+      date: '10/04/2020',
+    },
+    {
+      type: 'negativo',
+      title: 'Aluguel do Apartamento',
+      amount: 'R$ 1200,00',
+      category: {
+        name: 'Casa',
+        icon: 'dollar-sign',
+      },
+      date: '10/04/2020',
+    },
+  ];
+
   return (
     <Container>
       <Header>
@@ -25,11 +61,11 @@ export function Dashboard() {
           <UserInfo>
             <Photo
               source={{
-                uri: 'https://avatars.githubusercontent.com/u/52378619?v=4',
+                uri: 'https://avatars.githubusercontent.com/u/52378619?s=400&u=6927f634f63e0cd2101ca6d6156aa63a6dc2b3e9&v=4',
               }}
             />
             <User>
-              <UserGreeting>Olá, </UserGreeting>
+              <UserGreeting>Olá,</UserGreeting>
               <UserName>Julio</UserName>
             </User>
           </UserInfo>
@@ -43,18 +79,18 @@ export function Dashboard() {
           type="up"
           title="Entradas"
           amount="R$ 17.400,00"
-          lastTransaction="Última entrada 13 de abril"
+          lastTransaction="Última entrada dia 13 de abril"
         />
         <HighlightCard
           type="down"
           title="Saídas"
           amount="R$ 1.259,00"
-          lastTransaction="Última saída 3 de abril"
+          lastTransaction="Última saída dia 13 de abril"
         />
         <HighlightCard
           type="total"
           title="Total"
-          amount="R$ 16.400,00"
+          amount="R$ 16.141,00"
           lastTransaction="01 à 16 de abril"
         />
       </HighlightCards>
@@ -62,7 +98,14 @@ export function Dashboard() {
       <Transactions>
         <Title>Listagem</Title>
 
-        <TransactionCard />
+        <TransactionList
+          data={data}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: getBottomSpace(),
+          }}
+        />
       </Transactions>
     </Container>
   );
