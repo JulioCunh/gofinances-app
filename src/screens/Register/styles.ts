@@ -20,3 +20,12 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.shape};
 `;
+
+export const Form = styled.View`
+  flex: 1;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px;
+`;
+
+export const Fields = styled.View``;
